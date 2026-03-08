@@ -1,0 +1,220 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #f5c542;
+  --deep: #0a0a1a;
+  --accent: #ff4e6a;
+  --light: #fff8ee;
+  --green: #00c896;
+}
+
+body {
+  background: var(--deep);
+  font-family: 'Tajawal', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ── STARS ── */
+#stars-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── MAIN WRAPPER ── */
+.wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* ── FLAG BADGE ── */
+.flag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  color: #aaa;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+/* ── CAKE ICON ── */
+.cake-wrap {
+  font-size: 6rem;
+  line-height: 1;
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: popIn 0.7s 0.5s cubic-bezier(.34,1.56,.64,1) forwards;
+  filter: drop-shadow(0 0 24px rgba(245,197,66,0.5));
+}
+
+/* ── TITLE ── */
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.1;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.7s forwards;
+  text-shadow: 0 0 40px rgba(245,197,66,0.35);
+}
+
+.title span {
+  display: block;
+  font-style: italic;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  background: linear-gradient(135deg, #f5c542 30%, #ff4e6a 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── AGE BADGE ── */
+.age-badge {
+  margin: 28px auto 0;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) 0%, var(--gold) 60%, var(--green) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(255,78,106,0.4), 0 0 80px rgba(245,197,66,0.2);
+  opacity: 0;
+  animation: popIn 0.8s 1.1s cubic-bezier(.34,1.56,.64,1) forwards;
+  position: relative;
+}
+
+.age-badge::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--deep);
+}
+
+.age-num {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.age-label {
+  position: relative;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #aaa;
+}
+
+/* ── MESSAGE CARD ── */
+.card {
+  margin-top: 42px;
+  max-width: 560px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(245,197,66,0.2);
+  border-radius: 20px;
+  padding: 32px 36px;
+  color: #ccc;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeUp 0.9s 1.4s forwards;
+  backdrop-filter: blur(12px);
+}
+
+.card strong { color: var(--gold); }
+
+/* ── TABUK LABEL ── */
+.location {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.7s forwards;
+}
+
+.location span { color: var(--green); }
+
+/* ── CONFETTI BUTTON ── */
+.btn {
+  margin-top: 36px;
+  padding: 14px 40px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--deep);
+  background: linear-gradient(135deg, var(--gold), var(--accent));
+  box-shadow: 0 8px 30px rgba(255,78,106,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.9s forwards;
+}
+
+.btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 40px rgba(245,197,66,0.45); }
+.btn:active { transform: scale(0.97); }
+
+/* ── CONFETTI PARTICLES ── */
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes confettiFall {
+  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.4) rotate(-10deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 50px;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeUp 0.8s 2.1s forwards;
+}
